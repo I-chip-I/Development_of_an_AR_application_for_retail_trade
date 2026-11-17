@@ -4,15 +4,26 @@ export class ModelManager
 {
     decorationModel = null;
     loader = new GLTFLoader();
+    modelPath = null;
+    displacement = null;
+    modelScale = null;
 
-    constructor( filePath )
+    constructor()
     {
-        this.loadNewModel( filePath );
+        this.loadNewModel();
     }
 
-    loadNewModel( filePath )
+    loadNewModel()
     {
-        this.loader.load( filePath, (gltf) => { this.decorationModel = gltf.scene; });
+        this.getModelParameters();
+        this.loader.load( this.modelPath, (gltf) => { this.decorationModel = gltf.scene; });
+    }
+
+    getModelParameters()
+    {
+        this.modelPath = './Models_and_tools/origami_paper_crane_on_string.glb'
+        this.displacement = 2;
+        this.modelScale = 0.5;
     }
 
     createNewCopy()

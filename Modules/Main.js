@@ -3,10 +3,10 @@ import { ModelManager } from './Model_Manager.js';
 import { ARManager } from './ARManager.js';
 
 const sceneManager = new SceneManager();
-const modelManager = new ModelManager( './Models_and_tools/origami_paper_crane_on_string.glb' );
+const modelManager = new ModelManager();
 const arManager = new ARManager( sceneManager, modelManager );
 
-arManager.init( sceneManager, modelManager );
+arManager.init();
 
 function onWindowResize() 
 {

@@ -33,11 +33,15 @@ export class ARManager
                             
             this.mark.matrix.decompose( decorationObject.position, decorationObject.quaternion, decorationObject.scale );
 
-            const displacement = 2;
-            const modelScale = 0.5;
-    
-            decorationObject.position.y = displacement;
-            decorationObject.scale.set( modelScale, modelScale, modelScale );
+            if ( this.modelManager.displacement )
+            {
+                decorationObject.position.y = this.modelManager.displacement;
+            }
+
+            if ( this.modelManager.modelScale )
+            {
+                decorationObject.scale.set( this.modelManager.modelScale, this.modelManager.modelScale, this.modelManager.modelScale );
+            }
     
             this.sceneManager.scene.add( decorationObject );
         }
