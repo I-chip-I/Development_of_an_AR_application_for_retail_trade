@@ -1,5 +1,5 @@
-import { SceneManager } from './Scene_Manager.js';
-import { ModelManager } from './Model_Manager.js';
+import { SceneManager } from './SceneManager.js';
+import { ModelManager } from './ModelManager.js';
 import { ARManager } from './ARManager.js';
 
 const sceneManager = new SceneManager();
