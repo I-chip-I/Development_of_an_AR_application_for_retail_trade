@@ -44,25 +44,25 @@ export class UIManager
         this.arManager.init(); 
     }
 
-    changeARbuttondesign( AR_button )
+    changeARbuttondesign( arButton )
     {
-        AR_button.style.backgroundColor = '#1a3079';
-        AR_button.style.color = 'white';
-        AR_button.style.border = 'none';
-        AR_button.style.borderRadius = '12px';
-        AR_button.style.fontWeight = '600';
-        AR_button.style.whiteSpace = 'nowrap';
-        AR_button.style.display = 'block';
-        AR_button.style.width = '90%';
-        AR_button.style.padding = '16px';
-        AR_button.style.boxSizing = 'border-box';
-        AR_button.style.position = 'relative';
-        AR_button.style.margin = '0';
-        AR_button.style.left = '50%';
-        AR_button.style.right = 'auto';
-        AR_button.style.top = 'auto';
-        AR_button.style.bottom = 'auto';
-        AR_button.style.transform = 'none';
+        arButton.style.backgroundColor = '#1a3079';
+        arButton.style.color = 'white';
+        arButton.style.border = 'none';
+        arButton.style.borderRadius = '12px';
+        arButton.style.fontWeight = '600';
+        arButton.style.whiteSpace = 'nowrap';
+        arButton.style.display = 'block';
+        arButton.style.width = '90%';
+        arButton.style.padding = '16px';
+        arButton.style.boxSizing = 'border-box';
+        arButton.style.position = 'relative';
+        arButton.style.margin = '0';
+        arButton.style.left = '50%';
+        arButton.style.right = 'auto';
+        arButton.style.top = 'auto';
+        arButton.style.bottom = 'auto';
+        arButton.style.transform = 'none';
     }
 
     closeProductCardPage()

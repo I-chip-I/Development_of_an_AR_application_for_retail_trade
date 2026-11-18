@@ -12,10 +12,9 @@ body
 {
     background: linear-gradient( to bottom, #325a9e, #1a3079, #2c1d4c );
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
     overflow: hidden;
+    position: relative;
 }
 
 /* White background */
@@ -194,7 +193,7 @@ body
 }
 
 /* Adaptation for mobile devices */
-@media (max-width: 768px)
+@media (max-width: 600px)
 {
     /* Add an option of vertical scroll */
     .white-body
