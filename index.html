@@ -4,6 +4,7 @@
 		<title>Development of an AR application for retail trade</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="PagesStyleManager.css">
 	</head>
 	<body>
 		<script type="importmap">
@@ -16,6 +17,39 @@
 			}
 		</script>
 
+		<!-- Page 1: Goods catalogue -->
+    	<div id="catalogue-page">
+        	<div class="white-body">
+            	<div class="catalogue-grid" id="catalogue-grid">
+                	<div class="product-card" id="open-garland">
+                    	<div class="catalogue-product-image">Photo</div>
+                    	<div class="catalogue-product-title">Origami Garland</div>
+                	</div>
+            	</div>
+    		</div>
+		</div>
+
+		<!-- Page 2: Goods card -->
+    	<div id="product-card-page" class="hidden">
+        	<div class="white-body">
+            	<button id="close-button" class="close-button">x</button>
+				<h1 class="product-card-title" id="product-card-title"></h1>
+
+            	<div class="product-card-container">
+                	<div class="product-card-left">
+                    	<div class="product-card-image">Photo</div>
+						<div id="ar-button-container"></div>
+						<button class="add-button" disabled>To cart</button>
+                	</div>
+
+                	<div class="product-card-right">
+                    	<div class="description-box">
+                        	<p>Product description</p>
+                    	</div>
+                	</div>
+            	</div>
+        	</div>
+    	</div>
 		<script type="module" src="./Modules/Main.js"></script>
 	</body>
 </html>

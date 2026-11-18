@@ -1,12 +1,15 @@
 import { SceneManager } from './SceneManager.js';
 import { ModelManager } from './ModelManager.js';
 import { ARManager } from './ARManager.js';
+import { UIManager } from './UIManager.js';
 
 const sceneManager = new SceneManager();
 const modelManager = new ModelManager();
 const arManager = new ARManager( sceneManager, modelManager );
+const uiManager = new UIManager( sceneManager, modelManager, arManager );
 
-arManager.init();
+arManager.uiManager = uiManager;
+uiManager.init();
 
 function onWindowResize() 
 {

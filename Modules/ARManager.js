@@ -5,6 +5,7 @@ export class ARManager
 {
     sceneManager = null;
     modelManager = null;
+    uiManager = null;
     mark = new THREE.Mesh(
         new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
         new THREE.MeshBasicMaterial()
@@ -23,6 +24,34 @@ export class ARManager
         this.modelManager = modelManager;
         this.controller1 = this.sceneManager.renderer.xr.getController( 0 );
         this.controller2 = this.sceneManager.renderer.xr.getController( 1 );
+    }
+
+    init()
+    {
+        const ARbutton = document.body.appendChild( ARButton.createButton( this.sceneManager.renderer, { requiredFeatures: [ 'hit-test' ] } ) );
+        const container = document.getElementById( 'ar-button-container' );
+        
+        if ( container )
+        {
+            container.appendChild( ARbutton );
+        } 
+        else 
+        {
+            document.body.appendChild( ARbutton );
+        }
+        this.uiManager.changeARbuttondesign( ARbutton );
+    
+        this.sceneManager.renderer.setAnimationLoop( this.animate.bind( this ) );
+
+        this.controller1.addEventListener( 'select', this.addNewObject.bind( this ) );
+        this.sceneManager.scene.add( this.controller1 );
+    
+        this.controller2.addEventListener( 'select', this.addNewObject.bind( this ) );
+        this.sceneManager.scene.add( this.controller2 );
+    
+        this.mark.matrixAutoUpdate = false;
+        this.mark.visible = false;
+        this.sceneManager.scene.add( this.mark );
     }
 
     addNewObject()
@@ -45,23 +74,6 @@ export class ARManager
     
             this.sceneManager.scene.add( decorationObject );
         }
-    }
-
-    init()
-    {
-        document.body.appendChild( ARButton.createButton( this.sceneManager.renderer, { requiredFeatures: [ 'hit-test' ] } ) );
-    
-        this.sceneManager.renderer.setAnimationLoop( this.animate.bind( this ) );
-
-        this.controller1.addEventListener( 'select', this.addNewObject.bind( this ) );
-        this.sceneManager.scene.add( this.controller1 );
-    
-        this.controller2.addEventListener( 'select', this.addNewObject.bind( this ) );
-        this.sceneManager.scene.add( this.controller2 );
-    
-        this.mark.matrixAutoUpdate = false;
-        this.mark.visible = false;
-        this.sceneManager.scene.add( this.mark );
     }
 
     processHitTestResult( frame, referenceSpace )
