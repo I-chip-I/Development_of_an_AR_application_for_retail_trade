@@ -136,7 +136,7 @@ body
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 15px
+    gap: 15px;
 }
 
 /* Description box */
@@ -191,4 +191,66 @@ body
 .hidden
 {
     display: none !important;
+}
+
+/* Adaptation for mobile devices */
+@media (max-width: 768px)
+{
+    /* Add an option of vertical scroll */
+    .white-body
+    {
+        height: 85vh;
+        padding: 25px 20px;
+        overflow-y: auto;
+    }
+
+    .product-card-title
+    {
+        margin-top: 35px;
+    }
+    
+    /* Container with one column */
+    .product-card-container
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+        padding-right: 5px;
+    }
+
+    /* Merge left and right columns */
+    .product-card-left,
+    .product-card-right
+    {
+        display: contents;
+    }
+
+    .product-card-image
+    {
+        order: 1;
+        flex-shrink: 0;
+    }
+
+    .description-box
+    {
+        order: 2;
+        min-height: 120px;
+        flex: none;
+        margin-bottom: 0;
+    }
+
+    #ar-button-container
+    {
+        order: 3;
+        margin: 5px 0 !important;
+    }
+
+
+    .add-button
+    {
+        order: 4;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
 }
