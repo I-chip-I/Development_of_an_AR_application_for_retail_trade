@@ -9,6 +9,7 @@ const arManager = new ARManager( sceneManager, modelManager );
 const uiManager = new UIManager( sceneManager, modelManager, arManager );
 
 arManager.uiManager = uiManager;
+arManager.init();
 uiManager.init();
 
 function onWindowResize() 

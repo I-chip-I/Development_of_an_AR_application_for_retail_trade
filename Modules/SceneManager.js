@@ -23,4 +23,24 @@ export class SceneManager
     {
         this.renderer.render( this.scene, this.camera );
     }
+
+    resetModule()
+    {
+        if ( this.renderer ) 
+        {
+            this.renderer.setAnimationLoop( null );
+        }
+
+        for ( let i = this.scene.children.length - 1; i >= 0; i-- ) 
+        {
+            const child = this.scene.children[ i ];
+
+            if ( child.userData && child.userData.tag == "model" ) 
+            {
+                this.scene.remove( child );
+            }
+        }
+
+        this.renderer.clear();
+    }
 }

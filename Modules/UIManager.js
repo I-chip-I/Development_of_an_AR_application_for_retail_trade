@@ -40,11 +40,9 @@ export class UIManager
         this.cataloguePage.classList.add( "hidden" );
         this.productCardPage.classList.remove( "hidden" );
         this.productCardTitle.innerText = cardName;
-
-        this.arManager.init(); 
     }
 
-    changeARbuttondesign( arButton )
+    changeARButtonDesign( arButton )
     {
         arButton.style.backgroundColor = '#1a3079';
         arButton.style.color = 'white';
@@ -65,15 +63,18 @@ export class UIManager
         arButton.style.transform = 'none';
     }
 
+    endARSession()
+    {
+        this.sceneManager.resetModule();
+        this.arManager.resetModule();
+    }
+
     closeProductCardPage()
     {
         this.productCardPage.classList.add( "hidden" );
         this.cataloguePage.classList.remove( "hidden" );
 
-        const session = this.sceneManager.renderer.xr.getSession();
-        if ( session )
-        {
-            session.end();
-        }
+        this.sceneManager.resetModule();
+        this.arManager.resetModule();
     }
 }

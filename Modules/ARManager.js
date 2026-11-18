@@ -27,19 +27,20 @@ export class ARManager
     }
 
     init()
-    {
+    {   
         const ARbutton = document.body.appendChild( ARButton.createButton( this.sceneManager.renderer, { requiredFeatures: [ 'hit-test' ] } ) );
         const container = document.getElementById( 'ar-button-container' );
         
         if ( container )
         {
+            container.innerHTML = '';
             container.appendChild( ARbutton );
         } 
         else 
         {
             document.body.appendChild( ARbutton );
         }
-        this.uiManager.changeARbuttondesign( ARbutton );
+        this.uiManager.changeARButtonDesign( ARbutton );
     
         this.sceneManager.renderer.setAnimationLoop( this.animate.bind( this ) );
 
@@ -59,6 +60,7 @@ export class ARManager
         if ( this.mark.visible && this.modelManager.decorationModel != null ) 
         { 
             const decorationObject = this.modelManager.createNewCopy();
+            decorationObject.userData.tag = "model";
                             
             this.mark.matrix.decompose( decorationObject.position, decorationObject.quaternion, decorationObject.scale );
 
@@ -122,39 +124,54 @@ export class ARManager
 
     animate( timestamp, frame ) 
     {
-
-	    if ( frame ) 
+	    if ( !frame ) 
         {
-
-		    const referenceSpace = this.sceneManager.renderer.xr.getReferenceSpace();
-		    const session = this.sceneManager.renderer.xr.getSession();
-
-		    if ( this.hitTestSourceRequested === false )
-            {
-			    session.requestReferenceSpace( 'viewer' ).then( ( referenceSpace ) =>
-                {
-                    session.requestHitTestSource( { space: referenceSpace } ).then( ( source ) =>
-                    {
-				        this.hitTestSource = source;
-			        } );
-			    } );
-
-			    session.addEventListener( 'end', () =>
-                {
-				    this.hitTestSourceRequested = false;
-				    this.hitTestSource = null;
-			    } );
-
-			    this.hitTestSourceRequested = true;
-		    }
-
-		    if ( this.hitTestSource ) 
-            {
-		        this.processHitTestResult( frame, referenceSpace );
-		    }
-
+            return;
 	    }
 
+        const referenceSpace = this.sceneManager.renderer.xr.getReferenceSpace();
+		const session = this.sceneManager.renderer.xr.getSession();
+
+		if ( this.hitTestSourceRequested === false )
+        {
+			session.requestReferenceSpace( 'viewer' ).then( ( referenceSpace ) =>
+            {
+                session.requestHitTestSource( { space: referenceSpace } ).then( ( source ) =>
+                {
+				    this.hitTestSource = source;
+			    } );
+			} );
+
+			session.addEventListener( 'end', () =>
+            {
+				this.hitTestSourceRequested = false;
+				this.hitTestSource = null;
+                    
+                if ( this.uiManager ) 
+                {
+                    this.uiManager.endARSession();
+                }
+			} );
+
+			this.hitTestSourceRequested = true;
+		}
+
+		if ( this.hitTestSource ) 
+        {
+		    this.processHitTestResult( frame, referenceSpace );
+		}
+
         this.sceneManager.render();
+    }
+
+    resetModule()
+    {
+        this.mark.visible = false;
+        this.hitTestSource = null;
+        this.hitTestSourceRequested = false;
+        this.lastMarkPosition.set( 0, 0, 0 );
+        this.lastMarkQuaternion.set( 0, 0, 0, 1 );
+        this.firstHit = true;
+        this.sceneManager.renderer.setAnimationLoop( this.animate.bind( this ) );
     }
 }
