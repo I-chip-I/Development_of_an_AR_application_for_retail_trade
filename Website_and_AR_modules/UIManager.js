@@ -1,18 +1,14 @@
 export class UIManager
 {
-    sceneManager = null;
-    modelManager = null;
-    arManager = null;
+    endARSession = null;
     cataloguePage = document.getElementById( 'catalogue-page' );
     catalogueGrid = document.getElementById( 'catalogue-grid' );
     productCardPage = document.getElementById( 'product-card-page' );
     productCardTitle = document.getElementById( 'product-card-title' );
 
-    constructor( sceneManager, modelManager, arManager )
+    constructor( endARSession )
     {
-        this.sceneManager = sceneManager;
-        this.modelManager = modelManager;
-        this.arManager = arManager;
+        this.endARSession = endARSession;
     }
 
     init()
@@ -63,18 +59,11 @@ export class UIManager
         arButton.style.transform = 'none';
     }
 
-    endARSession()
-    {
-        this.sceneManager.resetModule();
-        this.arManager.resetModule();
-    }
-
     closeProductCardPage()
     {
         this.productCardPage.classList.add( "hidden" );
         this.cataloguePage.classList.remove( "hidden" );
 
-        this.sceneManager.resetModule();
-        this.arManager.resetModule();
+        this.endARSession();
     }
 }

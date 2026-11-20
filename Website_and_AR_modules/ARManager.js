@@ -6,6 +6,7 @@ export class ARManager
     sceneManager = null;
     modelManager = null;
     uiManager = null;
+    endARSession = null;
     mark = new THREE.Mesh(
         new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
         new THREE.MeshBasicMaterial()
@@ -18,10 +19,12 @@ export class ARManager
     lastMarkQuaternion = new THREE.Quaternion();
     firstHit = true;
 
-    constructor( sceneManager, modelManager )
+    constructor( uiManager, sceneManager, modelManager, endARSession )
     {
+        this.uiManager = uiManager;
         this.sceneManager = sceneManager;
         this.modelManager = modelManager;
+        this.endARSession = endARSession;
         this.controller1 = this.sceneManager.renderer.xr.getController( 0 );
         this.controller2 = this.sceneManager.renderer.xr.getController( 1 );
     }
@@ -146,11 +149,7 @@ export class ARManager
             {
 				this.hitTestSourceRequested = false;
 				this.hitTestSource = null;
-                    
-                if ( this.uiManager ) 
-                {
-                    this.uiManager.endARSession();
-                }
+                this.endARSession();
 			} );
 
 			this.hitTestSourceRequested = true;

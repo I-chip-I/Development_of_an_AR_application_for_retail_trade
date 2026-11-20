@@ -1,16 +1,15 @@
-import { SceneManager } from './SceneManager.js';
-import { ModelManager } from './ModelManager.js';
 import { ARManager } from './ARManager.js';
+import { ModelManager } from './ModelManager.js';
+import { SceneManager } from './SceneManager.js';
 import { UIManager } from './UIManager.js';
 
+const uiManager = new UIManager( endARSession );
 const sceneManager = new SceneManager();
 const modelManager = new ModelManager();
-const arManager = new ARManager( sceneManager, modelManager );
-const uiManager = new UIManager( sceneManager, modelManager, arManager );
+const arManager = new ARManager( uiManager, sceneManager, modelManager, endARSession );
 
-arManager.uiManager = uiManager;
-arManager.init();
 uiManager.init();
+arManager.init();
 
 function onWindowResize() 
 {
@@ -20,3 +19,9 @@ function onWindowResize()
 }
 
 window.addEventListener( 'resize', onWindowResize );
+
+function endARSession()
+{
+    sceneManager.resetModule();
+    arManager.resetModule();
+}
