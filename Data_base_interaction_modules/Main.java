@@ -8,8 +8,8 @@ public class Main
         QueryController queryController = new QueryController( queryService );
 
         System.out.println( "Тест 1: Найти товар для карточки 000" );
-        queryController.handleQuery( "000");
+        queryController.handleQuery( "000" );
         System.out.println( "Тест 2: Найти товар для карточки 001" );
-        queryController.handleQuery( "001");
+        queryController.handleQuery( "001" );
     }
 }

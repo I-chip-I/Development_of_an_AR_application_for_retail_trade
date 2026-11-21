@@ -1,14 +1,14 @@
 export class UIManager
 {
-    endARSession = null;
+    rebootSystem = null;
     cataloguePage = document.getElementById( 'catalogue-page' );
     catalogueGrid = document.getElementById( 'catalogue-grid' );
     productCardPage = document.getElementById( 'product-card-page' );
     productCardTitle = document.getElementById( 'product-card-title' );
 
-    constructor( endARSession )
+    constructor( rebootSystem )
     {
-        this.endARSession = endARSession;
+        this.rebootSystem = rebootSystem;
     }
 
     init()
@@ -64,6 +64,6 @@ export class UIManager
         this.productCardPage.classList.add( "hidden" );
         this.cataloguePage.classList.remove( "hidden" );
 
-        this.endARSession();
+        this.rebootSystem();
     }
 }

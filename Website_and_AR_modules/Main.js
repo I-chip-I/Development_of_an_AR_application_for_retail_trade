@@ -3,10 +3,10 @@ import { ModelManager } from './ModelManager.js';
 import { SceneManager } from './SceneManager.js';
 import { UIManager } from './UIManager.js';
 
-const uiManager = new UIManager( endARSession );
+const uiManager = new UIManager( rebootSystem );
 const sceneManager = new SceneManager();
 const modelManager = new ModelManager();
-const arManager = new ARManager( uiManager, sceneManager, modelManager, endARSession );
+const arManager = new ARManager( uiManager, sceneManager, modelManager, rebootSystem );
 
 uiManager.init();
 arManager.init();
@@ -20,7 +20,7 @@ function onWindowResize()
 
 window.addEventListener( 'resize', onWindowResize );
 
-function endARSession()
+function rebootSystem()
 {
     sceneManager.resetModule();
     arManager.resetModule();
